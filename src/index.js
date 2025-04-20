@@ -1,14 +1,20 @@
-import env from 'dotenv'
+import dotenv from "dotenv";
+import exprsss from "express";
+import connectDB from "./db/index.js";
+import { app } from "./app.js";
 
-import exprsss from 'express'
-const app = exprsss()
+dotenv.config({
+  path: "./.env",
+});
+
 const port = process.env.PORT || 4000;
 
-app.get('/',(req,res)=>{
-    return res.send("<h1> Hello world </h1>")
-})
-
-
-app.listen(port,()=>{
-    console.log(`Server is Listen at http://localhost:${port}`);
-})
+connectDB()
+  .then(() => {
+    app.listen(port, () => {
+      console.log(`Server is Listen at http://localhost:${port}`);
+    });
+  })
+  .catch((error) => {
+    console.log("MONGO db connection failed !!! ", err);
+  });
