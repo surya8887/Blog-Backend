@@ -30,6 +30,10 @@ const userSchema = new Schema(
       trim: true,
       minlength: 6,
     },
+    bio: {
+      type: String,  
+      trim:true,
+    },
     avatar: {
       type: String,  // cloudinary url
     },
